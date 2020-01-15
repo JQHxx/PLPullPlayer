@@ -521,7 +521,7 @@
     Float64 duration = CMTimeGetSeconds(self.player.totalDuration);
     float positionPercent = currentPlaybackTime/duration;
     [self.controlsView updateProgressSliderPosition:positionPercent];
-    NSString *strTime1 = [self timeFormatted:currentPlaybackTime + 1];
+    NSString *strTime1 = [self timeFormatted:currentPlaybackTime];
     NSString *strTime2 = [self timeFormatted:duration];
     [self.controlsView updateDurationLabel:strTime1 durationString:strTime2];
 }
@@ -565,7 +565,7 @@
             _controlsView.hidden = NO;
             if(_playerMode == OFweekPlayerModeLIVE && self.isSeeked == NO && _isVodLive) {
                 // 快进
-                [self.player seekTo:CMTimeMake(self.vodliveSeekTime, self.player.currentTime.timescale)];
+                [self.player seekTo:CMTimeMake(self.vodliveSeekTime * 1000, 1000)];
                 //self.player.currentPlaybackTime = self.vodliveSeekTime;
                 self.isSeeked = YES;
             }
@@ -663,9 +663,7 @@
 #pragma mark - 播放器进度条拖动或点击
 - (void)progressSliderValueChanged:(float)value {
     Float64 currentTime = CMTimeGetSeconds(_player.totalDuration);
-    NSLog(@"currentTime %f", value * currentTime);
-    NSLog(@"timescale = %d", _player.currentTime.timescale);
-    [self.player seekTo:CMTimeMake(value * currentTime, _player.currentTime.timescale)];
+    [self.player seekTo:CMTimeMake(value * currentTime * 1000, 1000)];
 }
 
 - (void)progressSliderTouchDown {

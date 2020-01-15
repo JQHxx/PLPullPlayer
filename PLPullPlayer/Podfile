@@ -6,8 +6,7 @@ target 'PLPullPlayer' do
   # use_frameworks!
 
   # 七牛云拉流
-  # pod 'PLPlayerKit', '~> 3.4.3'
-  pod "PLPlayerKit", :podspec => 'https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec'
+  pod 'PLPlayerKit', '~> 3.4.3'
   pod 'Masonry', '~> 1.1.0'
   pod 'MSWeakTimer', '~> 1.1.0'
   pod 'SDCycleScrollView', '~> 1.80'
